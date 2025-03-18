@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Survey Prediction</title>
+    <script>
+        function validateInput(event) {
+            event.preventDefault();
+            let hour = document.getElementById("hour").value;
+            let resultDiv = document.getElementById("result");
+            if (hour < 0 || hour > 23 || isNaN(hour)) {
+                resultDiv.innerHTML = "Please enter a valid hour (0-23).";
+                resultDiv.style.color = "red";
+            } else {
+                document.getElementById("surveyForm").submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Time (Hour) to Get Best Doctors for Survey</h2>
+        <form id="surveyForm" action="/predict" method="post" onsubmit="validateInput(event)">
+            <input type="number" id="hour" name="hour" placeholder="Enter hour (0-23)" required>
+            <button type="submit">Get Best Doctors</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+</body>
+</html>
